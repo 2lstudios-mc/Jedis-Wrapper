@@ -1,0 +1,6 @@
+name: ${name}
+description: ${description}
+author: ${author}
+main: ${mainClassBukkit}
+version: ${version}
+url: ${url}

@@ -1,0 +1,118 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <!-- Project information -->
+    <groupId>dev._2lstudios</groupId>
+    <artifactId>Jedis-Wrapper</artifactId>
+    <packaging>jar</packaging>
+
+    <!-- Plugin Information -->
+    <name>Jedis</name>
+    <description>Jedis Wrapper for Bukkit, Spigot and BungeeCord</description>
+    <version>4.1.1</version>
+    <url>https://github.com/2lstudios-mc/jedis-wrapper</url>
+
+    <properties>
+        <author>2LStudios</author>
+        <mainClassBukkit>dev._2lstudios.jediswrapper.JedisWrapperBukkit</mainClassBukkit>
+        <mainClassBungee>dev._2lstudios.jediswrapper.JedisWrapperBungee</mainClassBungee>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+   <!-- External repositories -->
+    <repositories>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>bungeecord-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
+
+    <!-- Dependencies imports -->
+    <dependencies>
+        <!-- Bukkit / Spigot API -->
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.18.1-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Bungeecord API -->
+        <dependency>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-api</artifactId>
+            <version>1.18-R0.1-SNAPSHOT</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-api</artifactId>
+            <version>1.18-R0.1-SNAPSHOT</version>
+            <type>javadoc</type>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Redis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+    </dependencies>
+
+    <!-- Build settings -->
+    <build>
+        <!-- Name of your compiled artifact -->
+        <finalName>${artifactId}</finalName>
+        <!-- Directory of .java files -->
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <!-- Clean old builds and install dependencies before compile -->
+        <defaultGoal>clean install</defaultGoal>
+        <!-- Package files inside resource directory in to the jar -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
+        <!-- Compilation settings starts here -->
+        <plugins>
+            <!-- Compile with java 8 -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <!-- Include dependencies inside jar -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> 
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
